@@ -80,14 +80,17 @@ def compute_polygon_medial_axis(vertices, h=0.5):
     '''
     # compute all the circumcircles
     voronoi_vertices = []
+    voronoi_radiuses = []
     for triangle in tri_dt['triangles']:
         temp_vs = vs[triangle, :]
         A, B, C = temp_vs[0, :], temp_vs[1, :], temp_vs[2, :]
-        P, _ = compute_circumcircle(A, B, C)
+        P, radius = compute_circumcircle(A, B, C)
         voronoi_vertices.append(P)
+        voronoi_radiuses.append(radius)
     polygon = path.Path(vs) # check
     ins = polygon.contains_points(voronoi_vertices)
     medial_axis = []
+    medial_axis_circ_radius = []        # output the radius of circumcircles
     for (idx_a, idx_b), tri_lst in edge_to_face_dic.items():
         if len(tri_lst) == 2: # internal edge
             idx_1, idx_2 = tri_lst
@@ -95,17 +98,27 @@ def compute_polygon_medial_axis(vertices, h=0.5):
                 x1, y1 = voronoi_vertices[idx_1]
                 x2, y2 = voronoi_vertices[idx_2]
                 medial_axis.append(((x1, y1), (x2, y2)))
+                medial_axis_circ_radius.append((voronoi_radiuses[idx_1], voronoi_radiuses[idx_2]))  # could be redudant, but it is ok
         else:
             assert(len(tri_lst) == 1)
-    return medial_axis
+    return medial_axis, medial_axis_circ_radius
 
 
-def plot_polygon_medial_axis(vertices, medial_axis, ax=None):
+def plot_polygon_medial_axis(vertices, medial_axis, circ_radius=None, draw_circle_idx = 0, ax=None):
     """ plot the polygon defined by vertices and its medial axis"""
     if not ax:
         fig, ax = plt.subplots(figsize=(8, 8))
-    for (x1, y1), (x2, y2) in medial_axis:
+    for idx, ((x1, y1), (x2, y2)) in enumerate(medial_axis):
         ax.plot([x1, x2], [y1, y2], 'r--')
+
+        # draw circle
+        if circ_radius is not None and idx==draw_circle_idx:
+            circle1 = plt.Circle((x1, y1), circ_radius[idx][0], color='blue',fill=False)
+            circle2 = plt.Circle((x2, y2), circ_radius[idx][1], color='green',fill=False)
+            ax.add_artist(circle1)
+            ax.add_artist(circle2)
+
+
     plot_polygon(vertices, ax=ax)
 
 
