@@ -34,17 +34,19 @@ def main():
         h = float(sys.argv[2])
     fig, ax = plt.subplots(figsize=(8, 8))
     medial_axis, radiuses = compute_polygon_medial_axis(polygon, h=h)
+
+
     # medial_axis = compute_polygon_medial_axis(polygon, h=0.1)
-    plot_polygon_medial_axis(polygon, medial_axis, ax=ax)
-    ax.axis('equal')
-    ax.set_title('Medial Axis')
-    plt.show()
+    # plot_polygon_medial_axis(polygon, medial_axis, ax=ax)
+    # ax.axis('equal')
+    # ax.set_title('Medial Axis')
+    # plt.show()
     # plt.savefig('fig.jpg')
 
-    # # save radius to file
-    # with open('save_medial_axis_radius.txt','w') as f_obj:
-    #     for ((x1,y1),(x2,y2)),(r1, r2) in zip(medial_axis, radiuses):
-    #         f_obj.writelines('%f  %f  %f %f  %f  %f\n'%(x1, y1, x2, y2,r1, r2))
+    # save radius to file
+    with open('save_medial_axis_radius.txt','w') as f_obj:
+        for ((x1,y1),(x2,y2)),(r1, r2) in zip(medial_axis, radiuses):
+            f_obj.writelines('%f  %f  %f %f  %f  %f\n'%(x1, y1, x2, y2,r1, r2))
 
 
 if __name__ == "__main__":
