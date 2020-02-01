@@ -32,12 +32,12 @@ def main():
     h = 0.5
     if len(sys.argv)==3:
         h = float(sys.argv[2])
-    # fig, ax = plt.subplots(figsize=(8, 8))
+    fig, ax = plt.subplots(figsize=(8, 8))
     medial_axis, radiuses = compute_polygon_medial_axis(polygon, h=h)
-    # medial_axis = compute_polygon_medial_axis(polygon, h=0.5)
-    # plot_polygon_medial_axis(polygon, medial_axis, ax=ax)
-    # ax.axis('equal')
-    # ax.set_title('Medial Axis')
+    medial_axis = compute_polygon_medial_axis(polygon, h=0.5)
+    plot_polygon_medial_axis(polygon, medial_axis, ax=ax)
+    ax.axis('equal')
+    ax.set_title('Medial Axis')
     # plt.show()
 
     # save radius to file
