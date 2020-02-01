@@ -38,7 +38,8 @@ def main():
     plot_polygon_medial_axis(polygon, medial_axis, ax=ax)
     ax.axis('equal')
     ax.set_title('Medial Axis')
-    plt.show()
+    # plt.show()
+    plt.savefig('fig.jpg')
 
     # save radius to file
     with open('save_medial_axis_radius.txt','w') as f_obj:
