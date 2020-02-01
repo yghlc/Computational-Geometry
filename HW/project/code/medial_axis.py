@@ -27,7 +27,7 @@ def main():
         sys.exit(1)
     polygon = np.loadtxt(sys.argv[1])
     fig, ax = plt.subplots(figsize=(8, 8))
-    medial_axis = compute_polygon_medial_axis(polygon, h=0.1)
+    medial_axis, _ = compute_polygon_medial_axis(polygon, h=0.1)
     plot_polygon_medial_axis(polygon, medial_axis, ax=ax)
     ax.axis('equal')
     ax.set_title('Medial Axis')
