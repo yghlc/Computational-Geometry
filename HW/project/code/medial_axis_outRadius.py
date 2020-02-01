@@ -29,7 +29,7 @@ def main():
         print('Usage: >> python {} <polygon_file>'.format(sys.argv[0]))
         sys.exit(1)
     polygon = np.loadtxt(sys.argv[1])
-    h = 0.5
+    h = 0.1
     if len(sys.argv)==3:
         h = float(sys.argv[2])
     fig, ax = plt.subplots(figsize=(8, 8))
