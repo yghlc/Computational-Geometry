@@ -13,7 +13,7 @@ import sys
 
 # third party library
 import numpy as np
-import matplotlib.pyplot as plt
+
 import os
 
 # for the case running in other folder
@@ -32,10 +32,11 @@ def main():
     h = 0.1
     if len(sys.argv)==3:
         h = float(sys.argv[2])
-    fig, ax = plt.subplots(figsize=(8, 8))
+
     medial_axis, radiuses = compute_polygon_medial_axis(polygon, h=h)
 
-
+    # import matplotlib.pyplot as plt
+    # fig, ax = plt.subplots(figsize=(8, 8))
     # medial_axis = compute_polygon_medial_axis(polygon, h=0.1)
     # plot_polygon_medial_axis(polygon, medial_axis, ax=ax)
     # ax.axis('equal')
