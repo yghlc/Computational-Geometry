@@ -35,6 +35,7 @@ def main():
 
     medial_axis, radiuses = compute_polygon_medial_axis(polygon, h=h)
 
+    # avoid import matplotlib if don't need it, or it will ask for graphic environment, and make window loses focus
     # import matplotlib.pyplot as plt
     # fig, ax = plt.subplots(figsize=(8, 8))
     # medial_axis = compute_polygon_medial_axis(polygon, h=0.1)
