@@ -23,12 +23,14 @@ sys.path.insert(0, '../../lib/')
 from polygon_medial_axis import compute_polygon_medial_axis,\
         plot_polygon_medial_axis
 
+import re
 
 def main():
     if len(sys.argv) < 2:
         print('Usage: >> python {} <polygon_file>'.format(sys.argv[0]))
         sys.exit(1)
-    polygon = np.loadtxt(sys.argv[1])
+    polygon_txt = sys.argv[1]
+    polygon = np.loadtxt(polygon_txt)
     h = 0.1
     if len(sys.argv)==3:
         h = float(sys.argv[2])
@@ -45,8 +47,14 @@ def main():
     # plt.show()
     # plt.savefig('fig.jpg')
 
+    save_txt = 'save_medial_axis_radius.txt'
+    proc_id_str = re.findall('\d+',os.path.basename(polygon_txt))
+    if len(proc_id_str) == 1:
+        proc_id = int(proc_id_str[0])
+        save_txt = 'save_medial_axis_radius_%d.txt'%proc_id
+
     # save radius to file
-    with open('save_medial_axis_radius.txt','w') as f_obj:
+    with open(save_txt,'w') as f_obj:
         for ((x1,y1),(x2,y2)),(r1, r2) in zip(medial_axis, radiuses):
             f_obj.writelines('%f  %f  %f %f  %f  %f\n'%(x1, y1, x2, y2,r1, r2))
 
