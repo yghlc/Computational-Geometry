@@ -106,13 +106,17 @@ def compute_polygon_medial_axis(vertices, h=0.5):
 
 def plot_polygon_medial_axis(vertices, medial_axis, circ_radius=None, draw_circle_idx = 0, ax=None):
     """ plot the polygon defined by vertices and its medial axis"""
+
+    if isinstance(draw_circle_idx, list) is False:
+        draw_circle_idx = [draw_circle_idx]
+
     if not ax:
         fig, ax = plt.subplots(figsize=(8, 8))
     for idx, ((x1, y1), (x2, y2)) in enumerate(medial_axis):
         ax.plot([x1, x2], [y1, y2], 'r--')
 
         # draw circle
-        if circ_radius is not None and idx==draw_circle_idx:
+        if circ_radius is not None and idx in draw_circle_idx:
             circle1 = plt.Circle((x1, y1), circ_radius[idx][0], color='blue',fill=False)
             circle2 = plt.Circle((x2, y2), circ_radius[idx][1], color='green',fill=False)
             ax.add_artist(circle1)
