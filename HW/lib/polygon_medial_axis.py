@@ -117,16 +117,16 @@ def plot_polygon_medial_axis(vertices, medial_axis, circ_radius=None, draw_circl
 
         # draw circle
         if circ_radius is not None and idx in draw_circle_idx:
-            # circle1 = plt.Circle((x1, y1), circ_radius[idx][0], color='blue',fill=False)
+            circle1 = plt.Circle((x1, y1), circ_radius[idx][0], color='deepskyblue',fill=False)
             # circle2 = plt.Circle((x2, y2), circ_radius[idx][1], color='green',fill=False)
-            # ax.add_artist(circle1)
+            ax.add_artist(circle1)
             # ax.add_artist(circle2)
 
-            #only draw one circle and its center
-            circle1 = plt.Circle((x1, y1), circ_radius[idx][0], color='deepskyblue',fill=False)
-            ax.add_artist(circle1)
-            # draw the center point
-            ax.plot(x1,y1, marker='o', color='black', markersize=5)
+            # #only draw one circle and its center
+            # circle1 = plt.Circle((x1, y1), circ_radius[idx][0], color='deepskyblue',fill=False)
+            # ax.add_artist(circle1)
+            # # draw the center point
+            # ax.plot(x1,y1, marker='o', color='black', markersize=5)
 
 
     plot_polygon(vertices, ax=ax)
