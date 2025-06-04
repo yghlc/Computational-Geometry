@@ -48,7 +48,7 @@ def main():
     # plt.savefig('fig.jpg')
 
     save_txt = 'save_medial_axis_radius.txt'
-    proc_id_str = re.findall('\d+',os.path.basename(polygon_txt))
+    proc_id_str = re.findall(r'\d+',os.path.basename(polygon_txt))
     if len(proc_id_str) == 1:
         proc_id = int(proc_id_str[0])
         save_txt = 'save_medial_axis_radius_%d.txt'%proc_id
